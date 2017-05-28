@@ -2,6 +2,8 @@
 
 namespace Keiko\Uuid\Shortener;
 
+use Keiko\Uuid\Shortener\Exception\DictionaryException;
+
 class Dictionary
 {
     const DICTIONARY_UNMISTAKABLE = '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -26,7 +28,6 @@ class Dictionary
         $this->length = strlen($charsSet);
 
         /**
-         * TODO: Add invariants
          * 1) is long enough to reduce uuid?
          * 2) are elements unique?
          */
@@ -59,13 +60,16 @@ class Dictionary
     /**
      * @param int $index
      *
+     * @throws DictionaryException
+     *
      * @return string
      */
     public function getElement(int $index):string
     {
-        /**
-         * TODO: Test + Invariant
-         */
+        if (!isset($this->charsSet[$index])) {
+            throw DictionaryException::indexNotAvailable();
+        }
+
         return $this->charsSet[$index];
     }
 }

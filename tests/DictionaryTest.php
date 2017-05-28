@@ -75,6 +75,15 @@ class DictionaryTest extends TestCase
         $this->assertEquals('d', $char);
     }
 
-
+    /**
+     * @test
+     * @expectedException \Keiko\Uuid\Shortener\Exception\DictionaryException
+     * @expectedExceptionMessage Index not available in the Dictionary
+     */
+    public function it_should_fail_when_out_of_bounds_dictionary_index_is_requested()
+    {
+        // When
+        $this->dictionary->getElement(5);
+    }
 
 }
