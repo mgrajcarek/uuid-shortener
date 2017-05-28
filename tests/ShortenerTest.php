@@ -18,7 +18,7 @@ class ShortenerTest extends TestCase
     public function setup()
     {
         $this->shortener = new Shortener(
-            Dictionary::DICTIONARY_UNMISTAKABLE,
+            Dictionary::createUnmistakable(),
             new Converter()
         );
     }
@@ -74,7 +74,7 @@ class ShortenerTest extends TestCase
     {
         // Given
         $this->shortener = new Shortener(
-            Dictionary::DICTIONARY_ALPHANUMERIC,
+            Dictionary::createAlphanumeric(),
             new Converter()
         );
 

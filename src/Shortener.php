@@ -7,23 +7,23 @@ use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
 final class Shortener
 {
     /**
-     * @var ConverterInterface
-     */
-    private $converter;
-
-    /**
      * @var Dictionary
      */
     private $dictionary;
 
     /**
-     * @param string              $charsSet
+     * @var ConverterInterface
+     */
+    private $converter;
+
+    /**
+     * @param Dictionary         $dictionary
      * @param ConverterInterface $converter
      */
-    public function __construct(string $charsSet, ConverterInterface $converter)
+    public function __construct(Dictionary $dictionary, ConverterInterface $converter)
     {
+        $this->dictionary = $dictionary;
         $this->converter = $converter;
-        $this->dictionary = new Dictionary($charsSet);
     }
 
     /**

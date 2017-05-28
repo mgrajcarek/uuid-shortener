@@ -33,6 +33,22 @@ class Dictionary
     }
 
     /**
+     * @return Dictionary
+     */
+    public static function createUnmistakable()
+    {
+        return new Dictionary(self::DICTIONARY_UNMISTAKABLE);
+    }
+
+    /**
+     * @return Dictionary
+     */
+    public static function createAlphanumeric()
+    {
+        return new Dictionary(self::DICTIONARY_ALPHANUMERIC);
+    }
+
+    /**
      * @return int
      */
     public function getLength(): int
