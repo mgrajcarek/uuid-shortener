@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Keiko\Uuid\Shortener\Number\BigInt;
 
@@ -6,10 +7,6 @@ use Moontoast\Math\BigNumber;
 
 class Converter implements ConverterInterface
 {
-
-    /**
-     * TODO: Tests!
-     */
     /**
      * @param string $uuid
      *
