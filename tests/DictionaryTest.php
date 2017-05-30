@@ -88,7 +88,7 @@ class DictionaryTest extends TestCase
         $index = $this->dictionary->getCharIndex('Z');
 
         // Then
-        $this->assertEquals(31 ,$index);
+        $this->assertEquals(31, $index);
     }
 
     /**
