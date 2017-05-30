@@ -43,7 +43,7 @@ class Shortener
             $previousNumber = clone $uuidInt;
             $uuidInt = $uuidInt->divide($this->dictionary->getLength());
             $digit = $previousNumber->mod($this->dictionary->getLength());
-            $output .= $this->dictionary->getElement((int) $digit->getValue());
+            $output .= $this->dictionary->getChartAt((int) $digit->getValue());
         }
 
         return $output;
@@ -60,7 +60,7 @@ class Shortener
         foreach (str_split(strrev($shortUuid)) as $char) {
             $number
                 ->multiply($this->dictionary->getLength())
-                ->add(strpos(Dictionary::DICTIONARY_UNMISTAKABLE, $char));
+                ->add($this->dictionary->getCharIndex($char));
         }
 
         $hex = $this->converter->toHex($number);
@@ -74,7 +74,7 @@ class Shortener
      *
      * @return string
      */
-    public function formatHex(string $hex): string
+    private function formatHex(string $hex): string
     {
         preg_match('/([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{12})/', $hex, $matches);
         array_shift($matches);

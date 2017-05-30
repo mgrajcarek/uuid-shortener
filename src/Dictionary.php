@@ -72,12 +72,29 @@ class Dictionary
      *
      * @return string
      */
-    public function getElement(int $index): string
+    public function getChartAt(int $index): string
     {
         if (!isset($this->charsSet[$index])) {
             throw DictionaryException::indexNotAvailable();
         }
 
         return $this->charsSet[$index];
+    }
+
+    /**
+     * @param string $char
+     *
+     * @throws DictionaryException
+     *
+     * @return int
+     */
+    public function getCharIndex(string $char): int
+    {
+        $index = strpos($this->charsSet, $char);
+        if ($index === false) {
+            throw DictionaryException::charNotFound();
+        }
+
+        return $index;
     }
 }

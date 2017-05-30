@@ -37,7 +37,7 @@ class DictionaryTest extends TestCase
     public function it_should_allow_to_get_selected_Dictionary_char()
     {
         // When
-        $char = $this->dictionary->getElement(3);
+        $char = $this->dictionary->getChartAt(3);
 
         // Then
         $this->assertEquals('5', $char);
@@ -51,7 +51,7 @@ class DictionaryTest extends TestCase
     public function it_should_fail_when_out_of_bounds_dictionary_index_is_requested()
     {
         // When
-        $this->dictionary->getElement(100);
+        $this->dictionary->getChartAt(100);
     }
 
     /**
@@ -82,6 +82,29 @@ class DictionaryTest extends TestCase
     /**
      * @test
      */
+    public function it_should_return_index_of_dictionary_element()
+    {
+        // When
+        $index = $this->dictionary->getCharIndex('Z');
+
+        // Then
+        $this->assertEquals(31 ,$index);
+    }
+
+    /**
+     * @test
+     * @expectedException \Keiko\Uuid\Shortener\Exception\DictionaryException
+     * @expectedExceptionMessage Char not found
+     */
+    public function it_should_fail_when_asked_for_a_char_not_existing_in_a_dictionary()
+    {
+        // When
+        $this->dictionary->getCharIndex('Ć');
+    }
+
+    /**
+     * @test
+     */
     public function let_it_be_constructed_with_unmistakable_chars_set()
     {
         // Given
@@ -89,7 +112,7 @@ class DictionaryTest extends TestCase
 
         // When
         $length = $dictionary->getLength();
-        $lastChart = $dictionary->getElement(56);
+        $lastChart = $dictionary->getChartAt(56);
 
         // Then
         $this->assertEquals(57, $length);
@@ -106,7 +129,7 @@ class DictionaryTest extends TestCase
 
         // When
         $length = $dictionary->getLength();
-        $lastChart = $dictionary->getElement(9);
+        $lastChart = $dictionary->getChartAt(9);
 
         // Then
         $this->assertEquals(62, $length);

@@ -29,4 +29,12 @@ class DictionaryException extends \Exception
     {
         return new self('Dictionary charset is too short to reduce UUID');
     }
+
+    /**
+     * @return DictionaryException
+     */
+    public static function charNotFound()
+    {
+        return new self('Char not found');
+    }
 }
