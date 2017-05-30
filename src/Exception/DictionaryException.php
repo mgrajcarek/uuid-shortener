@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Keiko\Uuid\Shortener\Exception;
 
@@ -29,5 +29,4 @@ class DictionaryException extends \Exception
     {
         return new self('Dictionary charset is too short to reduce UUID');
     }
-
 }

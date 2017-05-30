@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Test\Keiko\Uuid\Shortener;
 
@@ -121,7 +122,7 @@ class DictionaryTest extends TestCase
             [''],
             ['abc'],
             ['1234567890'],
-            ['1234567890ABCDEF']
+            ['1234567890ABCDEF'],
         ];
     }
 }

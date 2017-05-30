@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Test\Keiko\Uuid\Shortener;
 
@@ -10,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 
 class ShortenerTest extends TestCase
 {
-
     /**
      * @var Shortener
      */
@@ -32,7 +32,7 @@ class ShortenerTest extends TestCase
         return [
             ['4e52c919-513e-4562-9248-7dd612c6c1ca', 'fpfyRTmt6XeE9ehEKZ5LwF'],
             ['806d0969-95b3-433b-976f-774611fdacbb', 'mavTAjNm4NVztDwh4gdSrQ'],
-            ['0c5873e8-7fea-4570-9487-ffe96ec30257', 'LpGtrrQFCbneY2GtQiXDD4']
+            ['0c5873e8-7fea-4570-9487-ffe96ec30257', 'LpGtrrQFCbneY2GtQiXDD4'],
         ];
     }
 
@@ -60,7 +60,7 @@ class ShortenerTest extends TestCase
         return [
             ['4e52c919-513e-4562-9248-7dd612c6c1ca', 'wO7daP4yaaDlTYOcoXEnN3'],
             ['806d0969-95b3-433b-976f-774611fdacbb', 'rfMuQ8HQ7CY0sc9avYqKu4'],
-            ['0c5873e8-7fea-4570-9487-ffe96ec30257', 'jnxYPDgoU155gsDuAWKIN']
+            ['0c5873e8-7fea-4570-9487-ffe96ec30257', 'jnxYPDgoU155gsDuAWKIN'],
         ];
     }
 
@@ -85,5 +85,4 @@ class ShortenerTest extends TestCase
         // Then
         $this->assertEquals($reduced, $shortened);
     }
-
 }

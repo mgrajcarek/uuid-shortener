@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Keiko\Uuid\Shortener;
 
@@ -33,7 +33,7 @@ class Shortener
      *
      * @return string
      */
-    public function reduce(string $uuid) : string
+    public function reduce(string $uuid): string
     {
         $uuidInt = $this->converter->fromHex($uuid);
         $output = '';
@@ -47,5 +47,4 @@ class Shortener
 
         return $output;
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Test\Keiko\Uuid\Shortener\Number\BigInt;
@@ -10,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class ConverterTest extends TestCase
 {
     /**
-     * @var Converter $converter
+     * @var Converter
      */
     private $converter;
 
@@ -49,6 +50,4 @@ class ConverterTest extends TestCase
         $this->assertInstanceOf(BigNumber::class, $bigNumber);
         $this->assertEquals(253, $bigNumber->getValue());
     }
-
-
 }

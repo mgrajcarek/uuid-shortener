@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Keiko\Uuid\Shortener;
 
@@ -45,8 +46,7 @@ class Dictionary
      */
     public static function createUnmistakable(): Dictionary
     {
-        return new Dictionary(self::DICTIONARY_UNMISTAKABLE);
-
+        return new self(self::DICTIONARY_UNMISTAKABLE);
     }
 
     /**
@@ -54,7 +54,7 @@ class Dictionary
      */
     public static function createAlphanumeric(): Dictionary
     {
-        return new Dictionary(self::DICTIONARY_ALPHANUMERIC);
+        return new self(self::DICTIONARY_ALPHANUMERIC);
     }
 
     /**

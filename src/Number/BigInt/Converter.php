@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Keiko\Uuid\Shortener\Number\BigInt;
@@ -28,5 +29,4 @@ class Converter implements ConverterInterface
     {
         return BigNumber::convertFromBase10($uuid, 16);
     }
-
 }
