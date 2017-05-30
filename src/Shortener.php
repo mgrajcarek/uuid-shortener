@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
+use Moontoast\Math\BigNumber;
 
 class Shortener
 {
@@ -46,5 +47,39 @@ class Shortener
         }
 
         return $output;
+    }
+
+    /**
+     * @param string $shortUuid
+     *
+     * @return string
+     */
+    public function expand(string $shortUuid): string
+    {
+        $number = new BigNumber(0);
+        foreach (str_split(strrev($shortUuid)) as $char) {
+            $number
+                ->multiply($this->dictionary->getLength())
+                ->add(strpos(Dictionary::DICTIONARY_UNMISTAKABLE, $char));
+        }
+
+        $hex = $this->converter->toHex($number);
+        $expandedUUID = $this->formatHex($hex);
+
+        return $expandedUUID;
+    }
+
+    /**
+     * @param string $hex
+     *
+     * @return string
+     */
+    public function formatHex(string $hex): string
+    {
+        preg_match('/([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{12})/', $hex, $matches);
+        array_shift($matches);
+        $expandedUUID = implode('-', $matches);
+
+        return $expandedUUID;
     }
 }

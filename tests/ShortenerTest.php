@@ -85,4 +85,16 @@ class ShortenerTest extends TestCase
         // Then
         $this->assertEquals($reduced, $shortened);
     }
+
+    /**
+     * @test
+     */
+    public function it_should_transform_short_uuid_into_its_hexadecimal_equivalent()
+    {
+        // When
+        $expanded = $this->shortener->expand('fpfyRTmt6XeE9ehEKZ5LwF');
+
+        // Then
+        $this->assertEquals('4e52c919-513e-4562-9248-7dd612c6c1ca', $expanded);
+    }
 }
