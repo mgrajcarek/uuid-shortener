@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
 
-final class Shortener
+class Shortener
 {
     /**
      * @var Dictionary
@@ -40,7 +42,7 @@ final class Shortener
             $previousNumber = clone $uuidInt;
             $uuidInt = $uuidInt->divide($this->dictionary->getLength());
             $digit = $previousNumber->mod($this->dictionary->getLength());
-            $output .= $this->dictionary->getElement($digit->getValue());
+            $output .= $this->dictionary->getElement((int) $digit->getValue());
         }
 
         return $output;

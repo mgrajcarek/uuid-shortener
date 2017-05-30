@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Keiko\Uuid\Shortener;
 
@@ -21,30 +22,37 @@ class Dictionary
 
     /**
      * @param string $charsSet
+     *
+     * @throws DictionaryException
      */
     public function __construct(string $charsSet)
     {
         $this->charsSet = $charsSet;
         $this->length = strlen($charsSet);
 
-        /**
-         * 1) is long enough to reduce uuid?
-         * 2) are elements unique?
-         */
+        if ($this->length <= 16) {
+            throw DictionaryException::charsetTooShort();
+        }
+
+        $uniqueChars = count_chars($charsSet, 3);
+        if (strlen($uniqueChars) !== $this->length) {
+            throw DictionaryException::nonUniqueChars();
+        }
     }
 
     /**
      * @return Dictionary
      */
-    public static function createUnmistakable()
+    public static function createUnmistakable(): Dictionary
     {
         return new Dictionary(self::DICTIONARY_UNMISTAKABLE);
+
     }
 
     /**
      * @return Dictionary
      */
-    public static function createAlphanumeric()
+    public static function createAlphanumeric(): Dictionary
     {
         return new Dictionary(self::DICTIONARY_ALPHANUMERIC);
     }
@@ -64,7 +72,7 @@ class Dictionary
      *
      * @return string
      */
-    public function getElement(int $index):string
+    public function getElement(int $index): string
     {
         if (!isset($this->charsSet[$index])) {
             throw DictionaryException::indexNotAvailable();
