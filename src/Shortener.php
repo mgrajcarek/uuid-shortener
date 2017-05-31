@@ -76,6 +76,7 @@ class Shortener
      */
     private function formatHex(string $hex): string
     {
+        $hex = str_pad($hex, 32, '0');
         preg_match('/([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{12})/', $hex, $matches);
         array_shift($matches);
         $expandedUUID = implode('-', $matches);

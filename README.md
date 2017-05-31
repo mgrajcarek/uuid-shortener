@@ -36,6 +36,26 @@ $shortener = new Shortener(
 echo $shortener->reduce($uuid); // output: mavTAjNm4NVztDwh4gdSrQ
 ```
 
+You can reverse the process and expand your short UUID back to hexadecimal value.
+
+```php
+<?php
+require 'vendor/autoload.php';
+
+use Keiko\Uuid\Shortener\Dictionary;
+use Keiko\Uuid\Shortener\Number\BigInt\Converter;
+use Keiko\Uuid\Shortener\Shortener;
+
+// Generate UUID, for example using Ramsey/UUID
+$shortUuid = 'mavTAjNm4NVztDwh4gdSrQ';
+$shortener = new Shortener(
+    Dictionary::createUnmistakable(), // or just pass your own characters set
+    new Converter()
+);
+
+echo $shortener->expand($shortUuid); // output: 806d0969-95b3-433b-976f-774611fdacbb 
+```
+
 # Plans
 UUID Shortener is not connected with any UUID generator library. 
 It also does not generate new UUIDs. 
