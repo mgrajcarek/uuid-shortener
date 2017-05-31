@@ -4,7 +4,7 @@ UUID SHORTENER
 [![Build Status](https://travis-ci.org/mgrajcarek/uuid-shortener.svg?branch=master)](https://travis-ci.org/mgrajcarek/uuid-shortener)
 
 A simple shortener library for RFC 4122 compatible UUIDs. 
-Change your long 34 chars long ID into it's shorter equivalent.
+Change your 34 chars long UUID into it's shorter equivalent.
 
 Key concept and inspiration taken from [pascaldevink/shortuuid](https://github.com/pascaldevink/shortuuid) library. 
 If you just need to generate short UUIDs fast, I encourage you to check his work.
