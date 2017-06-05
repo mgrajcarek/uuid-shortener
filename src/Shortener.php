@@ -36,14 +36,15 @@ class Shortener
      */
     public function reduce(string $uuid): string
     {
+        $dictionaryLength = $this->dictionary->getLength();
         $uuidInt = $this->converter->fromHex($uuid);
         $output = '';
 
         while ($uuidInt->getValue() > 0) {
             $previousNumber = clone $uuidInt;
-            $uuidInt = $uuidInt->divide($this->dictionary->getLength());
-            $digit = $previousNumber->mod($this->dictionary->getLength());
-            $output .= $this->dictionary->getChartAt((int) $digit->getValue());
+            $uuidInt = $uuidInt->divide($dictionaryLength);
+            $digit = $previousNumber->mod($dictionaryLength);
+            $output .= $this->dictionary->getCharAt((int) $digit->getValue());
         }
 
         return $output;
