@@ -1,9 +1,9 @@
 {
   "name": "keiko/uuid-shortener",
-  "description": "A simple RFC 4122 UUID shortener library. Change your long 34 chars long ID into it's shorter equivalent.",
+  "description": "A simple shortener library for RFC 4122 compatible UUIDs. Change your 36 chars long UUID into it's shorter equivalent.",
   "type": "library",
   "keywords": ["uuid", "identifier", "guid", "short", "shortener"],
-  "homepage": "https://github.com/ramsey/uuid",
+  "homepage": "https://github.com/mgrajcarek/uuid-shortener",
   "license": "MIT",
   "authors": [
     {
