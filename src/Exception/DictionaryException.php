@@ -9,9 +9,9 @@ class DictionaryException extends \Exception
     /**
      * @return DictionaryException
      */
-    public static function indexNotAvailable()
+    public static function indexOutOfBounds()
     {
-        return new self('Index not available in the Dictionary');
+        return new self('Index out of bounds in the Dictionary');
     }
 
     /**
@@ -25,9 +25,9 @@ class DictionaryException extends \Exception
     /**
      * @return DictionaryException
      */
-    public static function charsetTooShort()
+    public static function charsSetTooShort()
     {
-        return new self('Dictionary charset is too short to reduce UUID');
+        return new self('Dictionary characters set is too short to reduce UUID');
     }
 
     /**
@@ -35,6 +35,6 @@ class DictionaryException extends \Exception
      */
     public static function charNotFound()
     {
-        return new self('Char not found');
+        return new self('Character not found');
     }
 }

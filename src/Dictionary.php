@@ -32,7 +32,7 @@ class Dictionary
         $this->length = strlen($charsSet);
 
         if ($this->length <= 16) {
-            throw DictionaryException::charsetTooShort();
+            throw DictionaryException::charsSetTooShort();
         }
 
         $uniqueChars = count_chars($charsSet, 3);
@@ -72,10 +72,10 @@ class Dictionary
      *
      * @return string
      */
-    public function getChartAt(int $index): string
+    public function getCharAt(int $index): string
     {
         if (!isset($this->charsSet[$index])) {
-            throw DictionaryException::indexNotAvailable();
+            throw DictionaryException::indexOutOfBounds();
         }
 
         return $this->charsSet[$index];
