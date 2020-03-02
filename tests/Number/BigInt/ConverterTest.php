@@ -15,7 +15,7 @@ class ConverterTest extends TestCase
      */
     private $converter;
 
-    public function setup()
+    protected function setUp()
     {
         $this->converter = new Converter();
     }
