@@ -14,7 +14,7 @@ class DictionaryTest extends TestCase
      */
     private $dictionary;
 
-    public function setup()
+    protected function setUp()
     {
         $this->dictionary = new Dictionary('23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz');
     }

@@ -16,7 +16,7 @@ class ShortenerTest extends TestCase
      */
     private $shortener;
 
-    public function setup()
+    protected function setUp()
     {
         $this->shortener = new Shortener(
             Dictionary::createUnmistakable(),
