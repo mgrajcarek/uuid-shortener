@@ -16,7 +16,7 @@
     "source": "https://github.com/mgrajcarek/uuid-shortener"
   },
   "require": {
-    "php": "^7.0",
+    "php": "^7.2",
     "moontoast/math": "^1.1"
   },
   "require-dev": {
@@ -30,5 +30,10 @@
   },
   "autoload-dev": {
     "psr-4": {"Test\\Keiko\\Uuid\\Shortener\\": "tests/"}
+  },
+  "config": {
+    "platform": {
+      "php": "7.2.3"
+    }
   }
 }

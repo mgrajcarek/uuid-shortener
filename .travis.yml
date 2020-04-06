@@ -2,8 +2,6 @@ language: php
 sudo: false
 
 php:
-  - 7.0
-  - 7.1
   - 7.2
   - 7.3
   - 7.4
@@ -11,10 +9,6 @@ php:
 ## Build matrix for lowest and highest possible targets
 matrix:
   include:
-    - php: 7.0
-      env: dependencies=lowest
-    - php: 7.1
-      env: dependencies=lowest
     - php: 7.2
       env: dependencies=lowest
     - php: 7.3
