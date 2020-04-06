@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "678ad6c1465c966d04877ed46cd94209",
+    "content-hash": "70b74564ea7679e806f986f96117191a",
     "packages": [
         {
             "name": "moontoast/math",
@@ -1761,8 +1761,5 @@
         "php": "^7.2"
     },
     "platform-dev": [],
-    "platform-overrides": {
-        "php": "7.2.3"
-    },
     "plugin-api-version": "1.1.0"
 }
