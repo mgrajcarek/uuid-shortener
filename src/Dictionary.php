@@ -6,6 +6,7 @@ namespace Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Exception\DictionaryException;
 
+/** @psalm-immutable */
 class Dictionary
 {
     const DICTIONARY_UNMISTAKABLE = '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -43,6 +44,8 @@ class Dictionary
 
     /**
      * @return Dictionary
+     *
+     * @psalm-pure
      */
     public static function createUnmistakable(): Dictionary
     {
@@ -51,6 +54,8 @@ class Dictionary
 
     /**
      * @return Dictionary
+     *
+     * @psalm-pure
      */
     public static function createAlphanumeric(): Dictionary
     {
