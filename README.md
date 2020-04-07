@@ -1,6 +1,6 @@
 UUID SHORTENER
 ==============
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.0-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg)](https://php.net/)
 [![Build Status](https://travis-ci.org/mgrajcarek/uuid-shortener.svg?branch=master)](https://travis-ci.org/mgrajcarek/uuid-shortener)
 
 A simple shortener library for RFC 4122 compatible UUIDs. 
