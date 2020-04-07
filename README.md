@@ -46,7 +46,6 @@ use Keiko\Uuid\Shortener\Dictionary;
 use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Shortener;
 
-// Generate UUID, for example using Ramsey/UUID
 $shortUuid = 'mavTAjNm4NVztDwh4gdSrQ';
 $shortener = new Shortener(
     Dictionary::createUnmistakable(), // the same as used for a UUID reduction!
