@@ -6,6 +6,7 @@ namespace Keiko\Uuid\Shortener\Number\BigInt;
 
 use Moontoast\Math\BigNumber;
 
+/** @psalm-immutable */
 interface ConverterInterface
 {
     /**

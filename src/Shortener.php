@@ -7,6 +7,7 @@ namespace Keiko\Uuid\Shortener;
 use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
 use Moontoast\Math\BigNumber;
 
+/** @psalm-immutable */
 class Shortener
 {
     /**
