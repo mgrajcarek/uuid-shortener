@@ -4,30 +4,18 @@ declare(strict_types=1);
 
 namespace Keiko\Uuid\Shortener\Number\BigInt;
 
-use Moontoast\Math\BigNumber;
+use Brick\Math\BigInteger;
 
 /** @psalm-immutable */
 class Converter implements ConverterInterface
 {
-    /**
-     * @param string $uuid
-     *
-     * @return BigNumber
-     */
-    public function fromHex(string $uuid): BigNumber
+    public function fromHex(string $uuid): BigInteger
     {
-        $uuidBase10 = BigNumber::convertToBase10($uuid, 16);
-
-        return new BigNumber($uuidBase10);
+        return BigInteger::fromBase(str_replace('-', '', $uuid), 16);
     }
 
-    /**
-     * @param BigNumber $uuid
-     *
-     * @return string
-     */
-    public function toHex(BigNumber $uuid): string
+    public function toHex(BigInteger $uuid): string
     {
-        return BigNumber::convertFromBase10($uuid, 16);
+        return $uuid->toBase(16);
     }
 }

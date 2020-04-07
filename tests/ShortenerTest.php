@@ -16,7 +16,7 @@ class ShortenerTest extends TestCase
      */
     private $shortener;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->shortener = new Shortener(
             Dictionary::createUnmistakable(),
@@ -24,10 +24,7 @@ class ShortenerTest extends TestCase
         );
     }
 
-    /**
-     * @return array
-     */
-    public function uuidShortenedUnmistakable()
+    public function uuidShortenedUnmistakable(): array
     {
         return [
             ['4e52c919-513e-4562-9248-7dd612c6c1ca', 'fpfyRTmt6XeE9ehEKZ5LwF'],
@@ -70,10 +67,7 @@ class ShortenerTest extends TestCase
         $this->assertEquals($reduced, $shortened);
     }
 
-    /**
-     * @return array
-     */
-    public function uuidShortenedAlphanumeric()
+    public function uuidShortenedAlphanumeric(): array
     {
         return [
             ['4e52c919-513e-4562-9248-7dd612c6c1ca', 'wO7daP4yaaDlTYOcoXEnN3'],

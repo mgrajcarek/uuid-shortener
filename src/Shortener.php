@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Keiko\Uuid\Shortener;
 
+use Brick\Math\BigInteger;
+use Brick\Math\RoundingMode;
 use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
-use Moontoast\Math\BigNumber;
 
 /** @psalm-immutable */
 class Shortener
@@ -30,59 +31,40 @@ class Shortener
         $this->converter = $converter;
     }
 
-    /**
-     * @param string $uuid
-     *
-     * @return string
-     */
     public function reduce(string $uuid): string
     {
         $dictionaryLength = $this->dictionary->getLength();
         $uuidInt = $this->converter->fromHex($uuid);
         $output = '';
 
-        while ($uuidInt->getValue() > 0) {
+        while ($uuidInt->isPositive()) {
             $previousNumber = clone $uuidInt;
-            $uuidInt = $uuidInt->divide($dictionaryLength);
+            $uuidInt = $uuidInt->dividedBy($dictionaryLength, RoundingMode::DOWN);
             $digit = $previousNumber->mod($dictionaryLength);
-            $output .= $this->dictionary->getCharAt((int) $digit->getValue());
+            $output .= $this->dictionary->getCharAt($digit->toInt());
         }
 
         return $output;
     }
 
-    /**
-     * @param string $shortUuid
-     *
-     * @return string
-     */
     public function expand(string $shortUuid): string
     {
-        $number = new BigNumber(0);
+        $number = BigInteger::zero();
         foreach (str_split(strrev($shortUuid)) as $char) {
-            $number
-                ->multiply($this->dictionary->getLength())
-                ->add($this->dictionary->getCharIndex($char));
+            $number = $number
+                ->multipliedBy($this->dictionary->getLength())
+                ->plus($this->dictionary->getCharIndex($char));
         }
 
-        $hex = $this->converter->toHex($number);
-        $expandedUUID = $this->formatHex($hex);
-
-        return $expandedUUID;
+        return $this->formatHex($this->converter->toHex($number));
     }
 
-    /**
-     * @param string $hex
-     *
-     * @return string
-     */
     private function formatHex(string $hex): string
     {
         $hex = str_pad($hex, 32, '0', \STR_PAD_LEFT);
         preg_match('/([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{12})/', $hex, $matches);
         array_shift($matches);
-        $expandedUUID = implode('-', $matches);
 
-        return $expandedUUID;
+        return implode('-', $matches);
     }
 }

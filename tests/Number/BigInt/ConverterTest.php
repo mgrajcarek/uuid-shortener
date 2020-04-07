@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Test\Keiko\Uuid\Shortener\Number\BigInt;
 
+use Brick\Math\BigInteger;
+use Brick\Math\BigNumber;
 use Keiko\Uuid\Shortener\Number\BigInt\Converter;
-use Moontoast\Math\BigNumber;
 use PHPUnit\Framework\TestCase;
 
 class ConverterTest extends TestCase
@@ -15,7 +16,7 @@ class ConverterTest extends TestCase
      */
     private $converter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->converter = new Converter();
     }
@@ -26,7 +27,7 @@ class ConverterTest extends TestCase
     public function it_should_transform_BigNumbers_into_hexadecimal_values()
     {
         // Given
-        $number = new BigNumber(254, 0);
+        $number = BigInteger::of(254);
 
         // When
         $hex = $this->converter->toHex($number);
@@ -48,6 +49,6 @@ class ConverterTest extends TestCase
 
         // Then
         $this->assertInstanceOf(BigNumber::class, $bigNumber);
-        $this->assertEquals(253, $bigNumber->getValue());
+        $this->assertEquals(253, $bigNumber->toInt());
     }
 }
