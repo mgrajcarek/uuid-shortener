@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Test\Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Dictionary;
+use Keiko\Uuid\Shortener\Exception\DictionaryException;
 use PHPUnit\Framework\TestCase;
 
 class DictionaryTest extends TestCase
@@ -14,7 +15,7 @@ class DictionaryTest extends TestCase
      */
     private $dictionary;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->dictionary = new Dictionary('23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz');
     }
@@ -45,36 +46,36 @@ class DictionaryTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Keiko\Uuid\Shortener\Exception\DictionaryException
-     * @expectedExceptionMessage Index out of bounds in the Dictionary
      */
     public function it_should_fail_when_out_of_bounds_dictionary_index_is_requested()
     {
+        $this->expectExceptionObject(DictionaryException::indexOutOfBounds());
+
         // When
         $this->dictionary->getCharAt(100);
     }
 
     /**
      * @test
-     * @expectedException \Keiko\Uuid\Shortener\Exception\DictionaryException
-     * @expectedExceptionMessage Dictionary characters set is too short to reduce UUID
      * @dataProvider tooShortCharsSets
      *
      * @param string $charsSet
      */
     public function it_should_fail_when_constructing_chars_set_is_shorter_then_17_chars(string $charsSet)
     {
+        $this->expectExceptionObject(DictionaryException::charsSetTooShort());
+
         // When
         new Dictionary($charsSet);
     }
 
     /**
      * @test
-     * @expectedException \Keiko\Uuid\Shortener\Exception\DictionaryException
-     * @expectedExceptionMessage Dictionary contains non unique characters
      */
     public function it_should_fail_when_constructing_chars_set_contains_non_unique_characters()
     {
+        $this->expectExceptionObject(DictionaryException::nonUniqueChars());
+
         // When
         new Dictionary('1234567890ABCDEF123');
     }
@@ -93,11 +94,11 @@ class DictionaryTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Keiko\Uuid\Shortener\Exception\DictionaryException
-     * @expectedExceptionMessage Character not found
      */
     public function it_should_fail_when_asked_for_a_char_not_existing_in_a_dictionary()
     {
+        $this->expectExceptionObject(DictionaryException::charNotFound());
+
         // When
         $this->dictionary->getCharIndex('Ć');
     }

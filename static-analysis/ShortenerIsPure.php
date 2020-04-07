@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Test\Keiko\StaticAnalysis;
 
+use Brick\Math\BigInteger;
 use Keiko\Uuid\Shortener\Dictionary;
 use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
 use Keiko\Uuid\Shortener\Shortener;
-use Moontoast\Math\BigNumber;
 
 /**
  * This is a static analysis fixture to verify that the API signature
@@ -27,13 +27,13 @@ final class ShortenerIsPure
     public function testImmutableConverterFromHex(
         ConverterInterface $converter,
         string $hex
-    ): BigNumber {
+    ): BigInteger {
         return $converter->fromHex($hex);
     }
 
     public function testImmutableConverterToHex(
         ConverterInterface $converter,
-        BigNumber $number
+        BigInteger $number
     ): string {
         return $converter->toHex($number);
     }
