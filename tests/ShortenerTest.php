@@ -24,6 +24,52 @@ class ShortenerTest extends TestCase
         );
     }
 
+    /**
+     * @dataProvider uuidShortenedUnmistakable
+     */
+    public function testUuidsAndShortUuidsAreIsomorphisms(string $uuid): void
+    {
+        self::assertSame(
+            $uuid,
+            $this->shortener->expand($this->shortener->reduce($uuid))
+        );
+    }
+
+    /**
+     * @dataProvider uuidShortenedUnmistakable
+     */
+    public function testTransformUuidToShorterEquivalentUsingUnmistakableCharsSet(string $uuid, string $reduced): void
+    {
+        $this->assertEquals($reduced, $this->shortener->reduce($uuid));
+    }
+
+    /**
+     * @dataProvider uuidShortenedAlphanumeric
+     */
+    public function testTransformUuidToShorterEquivalentUsingAlphanumericCharsSet($uuid, $reduced): void
+    {
+        $shortener = new Shortener(Dictionary::createAlphanumeric(), new Converter());
+
+        $this->assertEquals($reduced, $shortener->reduce($uuid));
+    }
+
+    public function testExpandShortUuid(): void
+    {
+        $this->assertEquals(
+            '4e52c919-513e-4562-9248-7dd612c6c1ca',
+            $this->shortener->expand('fpfyRTmt6XeE9ehEKZ5LwF')
+        );
+    }
+
+    public function uuidShortenedAlphanumeric(): array
+    {
+        return [
+            ['4e52c919-513e-4562-9248-7dd612c6c1ca', 'wO7daP4yaaDlTYOcoXEnN3'],
+            ['806d0969-95b3-433b-976f-774611fdacbb', 'rfMuQ8HQ7CY0sc9avYqKu4'],
+            ['0c5873e8-7fea-4570-9487-ffe96ec30257', 'jnxYPDgoU155gsDuAWKIN'],
+        ];
+    }
+
     public function uuidShortenedUnmistakable(): array
     {
         return [
@@ -37,76 +83,5 @@ class ShortenerTest extends TestCase
             'Large UUID, many trailing zeroes'  => ['aa000000-0000-0000-0000-000000000000', 'ABitJoXBZDBeRvbiWuB5GY'],
             'Random UUID with trailing zeroes'  => ['a7fe2146-0a94-4a4a-9956-4cfd0d3560d0', 'Fbab7rU5aCkhaybY3jphtX'],
         ];
-    }
-
-    /**
-     * @test
-     * @dataProvider uuidShortenedUnmistakable
-     */
-    public function uuids_and_short_uuids_are_isomorphisms(string $uuid)
-    {
-        self::assertSame(
-            $uuid,
-            $this->shortener->expand($this->shortener->reduce($uuid))
-        );
-    }
-
-    /**
-     * @test
-     * @dataProvider uuidShortenedUnmistakable
-     *
-     * @param string $uuid
-     * @param string $reduced
-     */
-    public function it_should_transform_uuid_to_a_shorter_equivalent_using_short_set_of_characters($uuid, $reduced)
-    {
-        // When
-        $shortened = $this->shortener->reduce($uuid);
-
-        // Then
-        $this->assertEquals($reduced, $shortened);
-    }
-
-    public function uuidShortenedAlphanumeric(): array
-    {
-        return [
-            ['4e52c919-513e-4562-9248-7dd612c6c1ca', 'wO7daP4yaaDlTYOcoXEnN3'],
-            ['806d0969-95b3-433b-976f-774611fdacbb', 'rfMuQ8HQ7CY0sc9avYqKu4'],
-            ['0c5873e8-7fea-4570-9487-ffe96ec30257', 'jnxYPDgoU155gsDuAWKIN'],
-        ];
-    }
-
-    /**
-     * @test
-     * @dataProvider uuidShortenedAlphanumeric
-     *
-     * @param string $uuid
-     * @param string $reduced
-     */
-    public function it_should_transform_uuid_to_a_shorter_equivalent_using_normal_set_of_characters($uuid, $reduced)
-    {
-        // Given
-        $this->shortener = new Shortener(
-            Dictionary::createAlphanumeric(),
-            new Converter()
-        );
-
-        // When
-        $shortened = $this->shortener->reduce($uuid);
-
-        // Then
-        $this->assertEquals($reduced, $shortened);
-    }
-
-    /**
-     * @test
-     */
-    public function it_should_transform_short_uuid_into_its_hexadecimal_equivalent()
-    {
-        // When
-        $expanded = $this->shortener->expand('fpfyRTmt6XeE9ehEKZ5LwF');
-
-        // Then
-        $this->assertEquals('4e52c919-513e-4562-9248-7dd612c6c1ca', $expanded);
     }
 }
