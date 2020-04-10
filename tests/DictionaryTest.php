@@ -20,126 +20,67 @@ class DictionaryTest extends TestCase
         $this->dictionary = new Dictionary('23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz');
     }
 
-    /**
-     * @test
-     */
-    public function it_should_return_Dictionary_length()
+    public function testReturnDictionaryLength(): void
     {
-        // When
-        $dictLength = $this->dictionary->getLength();
-
-        // Then
-        $this->assertEquals(57, $dictLength);
+        $this->assertEquals(57, $this->dictionary->getLength());
     }
 
-    /**
-     * @test
-     */
-    public function it_should_allow_to_get_selected_Dictionary_char()
+    public function testReturnDictionaryCharAt(): void
     {
-        // When
-        $char = $this->dictionary->getCharAt(3);
-
-        // Then
-        $this->assertEquals('5', $char);
+        $this->assertEquals('5', $this->dictionary->getCharAt(3));
     }
 
-    /**
-     * @test
-     */
-    public function it_should_fail_when_out_of_bounds_dictionary_index_is_requested()
+    public function testThrowExceptionWhenDictionaryCharAtIsOutOfBounds(): void
     {
         $this->expectExceptionObject(DictionaryException::indexOutOfBounds());
 
-        // When
         $this->dictionary->getCharAt(100);
     }
 
     /**
-     * @test
      * @dataProvider tooShortCharsSets
-     *
-     * @param string $charsSet
      */
-    public function it_should_fail_when_constructing_chars_set_is_shorter_then_17_chars(string $charsSet)
+    public function testThrowExceptionWhenProvidedCharsSetIsTooShort(string $charsSet): void
     {
         $this->expectExceptionObject(DictionaryException::charsSetTooShort());
 
-        // When
         new Dictionary($charsSet);
     }
 
-    /**
-     * @test
-     */
-    public function it_should_fail_when_constructing_chars_set_contains_non_unique_characters()
+    public function testThrowsExceptionWhenProvidedCharsSetContainsNonUniqueCharacters(): void
     {
         $this->expectExceptionObject(DictionaryException::nonUniqueChars());
 
-        // When
         new Dictionary('1234567890ABCDEF123');
     }
 
-    /**
-     * @test
-     */
-    public function it_should_return_index_of_dictionary_element()
+    public function testReturnCharIndex(): void
     {
-        // When
-        $index = $this->dictionary->getCharIndex('Z');
-
-        // Then
-        $this->assertEquals(31, $index);
+        $this->assertEquals(31, $this->dictionary->getCharIndex('Z'));
     }
 
-    /**
-     * @test
-     */
-    public function it_should_fail_when_asked_for_a_char_not_existing_in_a_dictionary()
+    public function testThrowExceptonWhenGettingNonExistentCharsIndex(): void
     {
         $this->expectExceptionObject(DictionaryException::charNotFound());
 
-        // When
         $this->dictionary->getCharIndex('Ć');
     }
-
-    /**
-     * @test
-     */
-    public function let_it_be_constructed_with_unmistakable_chars_set()
+    public function testCreateUnmistakableDictionary(): void
     {
-        // Given
         $dictionary = Dictionary::createUnmistakable();
 
-        // When
-        $length = $dictionary->getLength();
-        $lastChar = $dictionary->getCharAt(56);
-
-        // Then
-        $this->assertEquals(57, $length);
-        $this->assertEquals('z', $lastChar);
+        $this->assertEquals(57, $dictionary->getLength());
+        $this->assertEquals('z', $dictionary->getCharAt(56));
     }
 
-    /**
-     * @test
-     */
-    public function let_it_be_constructed_with_alphanumeric_chars_set()
+    public function testCreateAlphanumericDictionary(): void
     {
-        // Given
         $dictionary = Dictionary::createAlphanumeric();
 
-        // When
-        $length = $dictionary->getLength();
-        $lastChar = $dictionary->getCharAt(9);
-
-        // Then
-        $this->assertEquals(62, $length);
-        $this->assertEquals('0', $lastChar);
+        $this->assertEquals(62, $dictionary->getLength());
+        $this->assertEquals('0', $dictionary->getCharAt(9));
     }
 
-    /**
-     * @return array
-     */
     public function tooShortCharsSets(): array
     {
         return [
