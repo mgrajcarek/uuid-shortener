@@ -32,9 +32,9 @@ final class Dictionary
     /**
      * @param string $charsSet
      *
-     * @throws DictionaryException
+     * @psalm-param non-empty-string $charsSet
      *
-     * @TODO re-unit-test-me!
+     * @throws DictionaryException
      */
     public function __construct(string $charsSet)
     {
