@@ -6,7 +6,9 @@ namespace Keiko\Uuid\Shortener;
 
 use Brick\Math\BigInteger;
 use Brick\Math\RoundingMode;
+use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
+use function extension_loaded;
 
 /** @psalm-immutable */
 class Shortener
@@ -29,6 +31,15 @@ class Shortener
     {
         $this->dictionary = $dictionary;
         $this->converter = $converter;
+    }
+
+    public static function make(Dictionary $dictionary) : self
+    {
+        if (extension_loaded('gmp')) {
+            return new GMPShortener($dictionary);
+        }
+
+        return new self($dictionary, new Converter());
     }
 
     public function reduce(string $uuid): string

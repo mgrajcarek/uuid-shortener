@@ -24,12 +24,14 @@
     "brick/math": "^0.8.14"
   },
   "require-dev": {
+    "ext-gmp": "^7.2",
     "phpunit/phpunit": "^8.0",
     "vimeo/psalm": "^3.10",
     "phpbench/phpbench": "^0.17.0"
   },
   "suggest": {
-    "ramsey/uuid": "A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID)"
+    "ramsey/uuid": "A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID)",
+    "ext-gmp": "If you want to use the Keiko\\Uuid\\Shortener\\GMPShortener and benefit from much improved performance"
   },
   "autoload": {
     "psr-4": {"Keiko\\Uuid\\Shortener\\": "src/"}

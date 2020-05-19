@@ -14,4 +14,12 @@ final class GMPShortenerTest extends ShortenerTestCase
     {
         return new GMPShortener($dictionary ?? Dictionary::createUnmistakable());
     }
+
+    public function testInstantiatedShortenerIsTheGMPVariation(): void
+    {
+        self::assertEquals(
+            new GMPShortener(Dictionary::createUnmistakable()),
+            Shortener::make(Dictionary::createUnmistakable())
+        );
+    }
 }
