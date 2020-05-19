@@ -49,7 +49,7 @@ final class GMPShortener extends Shortener
             $previousNumber = $uuidInt;
             $uuidInt = gmp_div_q($uuidInt, $this->dictionary->length, \GMP_ROUND_ZERO);
             $digit = gmp_mod($previousNumber, $this->dictionary->length);
-            $output .= $this->dictionary->getCharAt(gmp_intval($digit));
+            $output .= $this->dictionary->charsSet[gmp_intval($digit)];
         }
 
         return $output;
