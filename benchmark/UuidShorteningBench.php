@@ -118,6 +118,12 @@ final class UuidShorteningBench
 
     /** @var Shortener */
     private $shortener;
+    /** @var string */
+    private $shortenedTinyUuid;
+    /** @var string */
+    private $shortenedHugeUuid;
+    /** @var array */
+    private $shortenedPromoscuousUuids;
 
     public function __construct()
     {
@@ -125,6 +131,10 @@ final class UuidShorteningBench
             Dictionary::createUnmistakable(),
             new Converter()
         );
+
+        $this->shortenedTinyUuid = $this->shortener->reduce(self::TINY_UUID);
+        $this->shortenedHugeUuid = $this->shortener->reduce(self::HUGE_UUID);
+        $this->shortenedPromoscuousUuids = \array_map([$this->shortener, 'reduce'], self::UUIDS_TO_BE_SHORTENED);
     }
 
     public function benchShorteningOfTinyUuid(): void
@@ -140,5 +150,20 @@ final class UuidShorteningBench
     public function benchShorteningOfPromiscuousUuids(): void
     {
         array_map([$this->shortener, 'reduce'], self::UUIDS_TO_BE_SHORTENED);
+    }
+
+    public function benchExpandingOfTinyUuid(): void
+    {
+        $this->shortener->expand($this->shortenedTinyUuid);
+    }
+
+    public function benchExpandingOfHugeUuid(): void
+    {
+        $this->shortener->expand($this->shortenedHugeUuid);
+    }
+
+    public function benchExpandingOfPromiscuousUuids(): void
+    {
+        array_map([$this->shortener, 'expand'], $this->shortenedPromoscuousUuids);
     }
 }
