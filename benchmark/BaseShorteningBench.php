@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Benchmark\Keiko\Uuid\Shortener;
 
-use Keiko\Uuid\Shortener\Dictionary;
-use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Shortener;
 use function array_map;
 
-final class UuidShorteningBench
+abstract class BaseShorteningBench
 {
     private const TINY_UUID = '00000000-0000-0000-0000-000000000001';
     private const HUGE_UUID = 'ffffffff-ffff-ffff-ffff-ffffffffffff';
@@ -127,15 +125,14 @@ final class UuidShorteningBench
 
     public function __construct()
     {
-        $this->shortener = new Shortener(
-            Dictionary::createUnmistakable(),
-            new Converter()
-        );
+        $this->shortener = $this->newShortener();
 
         $this->shortenedTinyUuid = $this->shortener->reduce(self::TINY_UUID);
         $this->shortenedHugeUuid = $this->shortener->reduce(self::HUGE_UUID);
         $this->shortenedPromoscuousUuids = \array_map([$this->shortener, 'reduce'], self::UUIDS_TO_BE_SHORTENED);
     }
+
+    abstract protected function newShortener(): Shortener;
 
     public function benchShorteningOfTinyUuid(): void
     {
