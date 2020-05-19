@@ -13,16 +13,19 @@ matrix:
       script:
         - vendor/bin/psalm
         - vendor/bin/phpunit
+        - vendor/bin/phpbench run
       env: dependencies=lowest
     - php: 7.3
       script:
         - vendor/bin/psalm
         - vendor/bin/phpunit
+        - vendor/bin/phpbench run
       env: dependencies=lowest
     - php: 7.4
       script:
         - vendor/bin/psalm
         - vendor/bin/phpunit
+        - vendor/bin/phpbench run
       env: dependencies=highest
 
 ## Update composer and run the appropriate composer command
