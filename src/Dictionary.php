@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Exception\DictionaryException;
+use function array_flip;
+use function count_chars;
+use function str_split;
+use function strlen;
 
 /** @psalm-immutable */
 final class Dictionary
@@ -15,6 +19,13 @@ final class Dictionary
     /** @var string */
     public $charsSet;
 
+    /**
+     * @var int[]
+     *
+     * @psalm-var non-empty-array<non-empty-string, int>
+     */
+    public $charIndexes;
+
     /** @var int */
     public $length;
 
@@ -22,20 +33,25 @@ final class Dictionary
      * @param string $charsSet
      *
      * @throws DictionaryException
+     *
+     * @TODO re-unit-test-me!
      */
     public function __construct(string $charsSet)
     {
-        $this->charsSet = $charsSet;
-        $this->length = strlen($charsSet);
+        $length = strlen($charsSet);
 
-        if ($this->length <= 16) {
+        if ($length <= 16) {
             throw DictionaryException::charsSetTooShort();
         }
 
         $uniqueChars = count_chars($charsSet, 3);
-        if (strlen($uniqueChars) !== $this->length) {
+        if (strlen($uniqueChars) !== $length) {
             throw DictionaryException::nonUniqueChars();
         }
+
+        $this->charsSet = $charsSet;
+        $this->length = $length;
+        $this->charIndexes = array_flip(str_split($charsSet));
     }
 
     /**
