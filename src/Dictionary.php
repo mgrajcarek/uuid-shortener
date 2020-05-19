@@ -7,20 +7,16 @@ namespace Keiko\Uuid\Shortener;
 use Keiko\Uuid\Shortener\Exception\DictionaryException;
 
 /** @psalm-immutable */
-class Dictionary
+final class Dictionary
 {
     const DICTIONARY_UNMISTAKABLE = '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     const DICTIONARY_ALPHANUMERIC = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
-    /**
-     * @var string
-     */
-    private $charsSet;
+    /** @var string */
+    public $charsSet;
 
-    /**
-     * @var int
-     */
-    private $length;
+    /** @var int */
+    public $length;
 
     /**
      * @param string $charsSet
