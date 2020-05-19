@@ -9,8 +9,11 @@ use Brick\Math\RoundingMode;
 use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
 use function gmp_cmp;
 use function gmp_div_q;
+use function gmp_init;
 use function gmp_intval;
 use function gmp_mod;
+use function gmp_strval;
+use function str_replace;
 
 /** @psalm-immutable */
 final class GMPShortener extends Shortener
@@ -40,7 +43,7 @@ final class GMPShortener extends Shortener
     public function reduce(string $uuid): string
     {
         $dictionaryLength = (string) $this->dictionary->getLength();
-        $uuidInt = $this->converter->fromHex($uuid)->toBase(10);
+        $uuidInt = gmp_strval(gmp_init(str_replace('-', '', $uuid), 16));
         $output = '';
 
         while (gmp_cmp($uuidInt, '0') > 0) {
