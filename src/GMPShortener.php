@@ -42,14 +42,13 @@ final class GMPShortener extends Shortener
 
     public function reduce(string $uuid): string
     {
-        $dictionaryLength = (string) $this->dictionary->getLength();
         $uuidInt = gmp_strval(gmp_init(str_replace('-', '', $uuid), 16));
         $output = '';
 
         while (gmp_cmp($uuidInt, '0') > 0) {
             $previousNumber = $uuidInt;
-            $uuidInt = gmp_div_q($uuidInt, $dictionaryLength, \GMP_ROUND_ZERO);
-            $digit = gmp_mod($previousNumber, $dictionaryLength);
+            $uuidInt = gmp_div_q($uuidInt, $this->dictionary->length, \GMP_ROUND_ZERO);
+            $digit = gmp_mod($previousNumber, $this->dictionary->length);
             $output .= $this->dictionary->getCharAt(gmp_intval($digit));
         }
 
