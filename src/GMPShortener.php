@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Keiko\Uuid\Shortener;
 
+use Keiko\Uuid\Shortener\Exception\DictionaryException;
 use function gmp_add;
 use function gmp_cmp;
 use function gmp_div_q;
@@ -49,7 +50,12 @@ final class GMPShortener extends Shortener
         $dictionaryLength = gmp_init($this->dictionary->length, 10);
 
         foreach (str_split(strrev($shortUuid)) as $char) {
-            $number = gmp_add(gmp_mul($number, $dictionaryLength), (string) $this->dictionary->charIndexes[$char]);
+            $number = gmp_add(
+                gmp_mul($number, $dictionaryLength),
+                (string) ($this->dictionary->charIndexes[$char] ?? (static function () : string {
+                    throw DictionaryException::indexOutOfBounds();
+                })())
+            );
         }
 
         $base16Uuid = str_pad(gmp_strval($number, 16), 32, '0', STR_PAD_LEFT);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Test\Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Dictionary;
+use Keiko\Uuid\Shortener\Exception\DictionaryException;
 use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Shortener;
 use PHPUnit\Framework\TestCase;
@@ -38,6 +39,15 @@ abstract class ShortenerTestCase extends TestCase
     public function testTransformUuidToShorterEquivalentUsingAlphanumericCharsSet($uuid, $reduced): void
     {
         $this->assertEquals($reduced, $this->shortener(Dictionary::createAlphanumeric())->reduce($uuid));
+    }
+
+    public function testShortUuidsWithInvalidDictionaryCharactersAreRejected(): void
+    {
+        $shortener = $this->shortener(new Dictionary('abcdefghijklmnopqrstuvwxz'));
+
+        $this->expectException(DictionaryException::class);
+
+        $shortener->expand('A');
     }
 
     public function testExpandShortUuid(): void

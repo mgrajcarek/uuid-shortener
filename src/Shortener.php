@@ -6,6 +6,7 @@ namespace Keiko\Uuid\Shortener;
 
 use Brick\Math\BigInteger;
 use Brick\Math\RoundingMode;
+use Keiko\Uuid\Shortener\Exception\DictionaryException;
 use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
 use function extension_loaded;
@@ -69,7 +70,11 @@ class Shortener
         foreach (str_split(strrev($shortUuid)) as $char) {
             $number = $number
                 ->multipliedBy($this->dictionary->length)
-                ->plus($this->dictionary->charIndexes[$char]);
+                ->plus(
+                    $this->dictionary->charIndexes[$char] ?? (static function () : string {
+                        throw DictionaryException::indexOutOfBounds();
+                    })()
+                );
         }
 
         $base16Uuid = str_pad($this->converter->toHex($number), 32, '0', STR_PAD_LEFT);
