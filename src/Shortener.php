@@ -9,6 +9,10 @@ use Brick\Math\RoundingMode;
 use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Number\BigInt\ConverterInterface;
 use function extension_loaded;
+use function str_pad;
+use function str_split;
+use function strrev;
+use function substr;
 
 /** @psalm-immutable */
 class Shortener
@@ -44,15 +48,16 @@ class Shortener
 
     public function reduce(string $uuid): string
     {
-        $dictionaryLength = $this->dictionary->getLength();
         $uuidInt = $this->converter->fromHex($uuid);
         $output = '';
 
         while ($uuidInt->isPositive()) {
-            $previousNumber = clone $uuidInt;
-            $uuidInt = $uuidInt->dividedBy($dictionaryLength, RoundingMode::DOWN);
-            $digit = $previousNumber->mod($dictionaryLength);
-            $output .= $this->dictionary->getCharAt($digit->toInt());
+            $output .= $this->dictionary->charsSet[
+                $uuidInt->mod($this->dictionary->length)
+                    ->toInt()
+            ];
+
+            $uuidInt = $uuidInt->dividedBy($this->dictionary->length, RoundingMode::DOWN);
         }
 
         return $output;
@@ -63,19 +68,20 @@ class Shortener
         $number = BigInteger::zero();
         foreach (str_split(strrev($shortUuid)) as $char) {
             $number = $number
-                ->multipliedBy($this->dictionary->getLength())
-                ->plus($this->dictionary->getCharIndex($char));
+                ->multipliedBy($this->dictionary->length)
+                ->plus($this->dictionary->charIndexes[$char]);
         }
 
-        return $this->formatHex($this->converter->toHex($number));
-    }
+        $base16Uuid = str_pad($this->converter->toHex($number), 32, '0', STR_PAD_LEFT);
 
-    private function formatHex(string $hex): string
-    {
-        $hex = str_pad($hex, 32, '0', \STR_PAD_LEFT);
-        preg_match('/([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{12})/', $hex, $matches);
-        array_shift($matches);
-
-        return implode('-', $matches);
+        return substr($base16Uuid,0, 8)
+            . '-'
+            . substr($base16Uuid, 8, 4)
+            . '-'
+            . substr($base16Uuid, 12, 4)
+            . '-'
+            . substr($base16Uuid, 16, 4)
+            . '-'
+            . substr($base16Uuid, 20, 12);
     }
 }
