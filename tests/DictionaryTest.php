@@ -20,6 +20,77 @@ class DictionaryTest extends TestCase
         $this->dictionary = new Dictionary('23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz');
     }
 
+    public function testInitialDictionaryState(): void
+    {
+        self::assertSame(
+            '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz',
+            $this->dictionary->charsSet
+        );
+        self::assertSame(57, $this->dictionary->length);
+        self::assertSame(
+            [
+                2   => 0,
+                3   => 1,
+                4   => 2,
+                5   => 3,
+                6   => 4,
+                7   => 5,
+                8   => 6,
+                9   => 7,
+                'A' => 8,
+                'B' => 9,
+                'C' => 10,
+                'D' => 11,
+                'E' => 12,
+                'F' => 13,
+                'G' => 14,
+                'H' => 15,
+                'J' => 16,
+                'K' => 17,
+                'L' => 18,
+                'M' => 19,
+                'N' => 20,
+                'P' => 21,
+                'Q' => 22,
+                'R' => 23,
+                'S' => 24,
+                'T' => 25,
+                'U' => 26,
+                'V' => 27,
+                'W' => 28,
+                'X' => 29,
+                'Y' => 30,
+                'Z' => 31,
+                'a' => 32,
+                'b' => 33,
+                'c' => 34,
+                'd' => 35,
+                'e' => 36,
+                'f' => 37,
+                'g' => 38,
+                'h' => 39,
+                'i' => 40,
+                'j' => 41,
+                'k' => 42,
+                'm' => 43,
+                'n' => 44,
+                'o' => 45,
+                'p' => 46,
+                'q' => 47,
+                'r' => 48,
+                's' => 49,
+                't' => 50,
+                'u' => 51,
+                'v' => 52,
+                'w' => 53,
+                'x' => 54,
+                'y' => 55,
+                'z' => 56,
+            ],
+            $this->dictionary->charIndexes
+        );
+    }
+
     public function testReturnDictionaryLength(): void
     {
         $this->assertEquals(57, $this->dictionary->getLength());

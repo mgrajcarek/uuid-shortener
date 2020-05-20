@@ -23,14 +23,12 @@ composer require keiko/uuid-shortener
 require 'vendor/autoload.php';
 
 use Keiko\Uuid\Shortener\Dictionary;
-use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Shortener;
 
 // Generate UUID, for example using Ramsey/UUID
 $uuid = '806d0969-95b3-433b-976f-774611fdacbb';
-$shortener = new Shortener(
-    Dictionary::createUnmistakable(), // or just pass your own characters set
-    new Converter()
+$shortener = Shortener::make(
+    Dictionary::createUnmistakable() // or pass your own characters set
 );
 
 echo $shortener->reduce($uuid); // output: mavTAjNm4NVztDwh4gdSrQ
@@ -43,17 +41,23 @@ You can reverse the process and expand your short UUID back to hexadecimal value
 require 'vendor/autoload.php';
 
 use Keiko\Uuid\Shortener\Dictionary;
-use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Shortener;
 
 $shortUuid = 'mavTAjNm4NVztDwh4gdSrQ';
-$shortener = new Shortener(
-    Dictionary::createUnmistakable(), // the same as used for a UUID reduction!
-    new Converter()
+$shortener = Shortener::make(
+    Dictionary::createUnmistakable()
 );
 
 echo $shortener->expand($shortUuid); // output: 806d0969-95b3-433b-976f-774611fdacbb 
 ```
+
+# Performance
+
+In order to get optimal performance from this library, it is endorsed that you run `ext-gmp`
+in your system.
+
+`Keiko\Uuid\Shortener\Shortener::make()` will pick a GMP-compatible shortener or a fallback
+shortener based on your system dependencies.
 
 # Plans
 UUID Shortener is not connected with any UUID generator library. 
