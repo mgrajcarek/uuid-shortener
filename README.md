@@ -7,7 +7,8 @@ A simple shortener library for RFC 4122 compatible UUIDs.
 Change your 36 chars long UUID into it's shorter equivalent.
 
 Key concept and inspiration taken from [pascaldevink/shortuuid](https://github.com/pascaldevink/shortuuid) library. 
-If you just need to generate short UUIDs fast, I encourage you to check his work.
+If you just need to generate short UUIDs the easy way, I encourage you to check his work.
+If you expect perfomance, this library uses `ext-gmp` to speed up the process.
   
  
 # Installation
