@@ -21,7 +21,7 @@
   },
   "require": {
     "php": "^7.2",
-    "brick/math": "^0.8.14"
+    "brick/math": "^0.9.1"
   },
   "require-dev": {
     "ext-gmp": "^7.2",
