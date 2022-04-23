@@ -35,6 +35,12 @@ matrix:
         - vendor/bin/phpbench run
       env: dependencies=highest
 
+    - php: 8.1
+      script:
+        - vendor/bin/psalm
+        - vendor/bin/phpunit
+        - vendor/bin/phpbench run
+      env: dependencies=highest
 ## Update composer and run the appropriate composer command
 before_script:
   - composer self-update -q

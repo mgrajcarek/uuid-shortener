@@ -73,6 +73,7 @@ abstract class ShortenerTestCase extends TestCase
             ['4e52c919-513e-4562-9248-7dd612c6c1ca', 'fpfyRTmt6XeE9ehEKZ5LwF'],
             ['806d0969-95b3-433b-976f-774611fdacbb', 'mavTAjNm4NVztDwh4gdSrQ'],
             ['0c5873e8-7fea-4570-9487-ffe96ec30257', 'LpGtrrQFCbneY2GtQiXDD4'],
+            ['ffffffff-ffff-ffff-ffff-ffffffffffff', '5B8cwPMGnU6qLbRvo7qEZo'],
             'One leading zero'                  => ['07fe2146-0a94-4a4a-9956-4cfd0d3560d9', 'rcPMmyWuaewoF8EM3JK5S3'],
             '2 Leading zeroes'                  => ['00fe2146-0a94-4a4a-9956-4cfd0d3560d9', 'qgXznd8uPVbCJg5tB5r5C'],
             'Smallest UUID, max leading zeroes' => ['00000000-0000-0000-0000-000000000001', '3'],
