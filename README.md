@@ -1,7 +1,7 @@
 UUID SHORTENER
 ==============
 [![Minimum PHP Version](https://img.shields.io/badge/php-%5E7.2%20%7C%7C%20%5E8.0-8892BF.svg)](https://php.net/)
-[![Build Status](https://travis-ci.org/mgrajcarek/uuid-shortener.svg?branch=master)](https://travis-ci.org/mgrajcarek/uuid-shortener)
+[![Build Status](https://github.com/mgrajcarek/uuid-shortener/actions/workflows/build.yaml/badge.svg?branch=master)](https://github.com/mgrajcarek/uuid-shortener/actions/workflows/build.yaml)
 
 A simple shortener library for RFC 4122 compatible UUIDs. 
 Change your 36 chars long UUID into it's shorter equivalent.
