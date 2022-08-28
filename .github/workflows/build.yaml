@@ -37,22 +37,10 @@ jobs:
           php-version: "${{ matrix.php }}"
           ini-values: memory_limit=-1
 
-      - name: "Cache Composer dependencies"
-        uses: actions/cache@v3
+      - name: "Install dependencies"
+        uses: ramsey/composer-install@v2
         with:
-          path: |
-            ~/.composer/cache
-            vendor
-          key: "php-${{ matrix.php }}-${{ matrix.dependencies }}"
-          restore-keys: "php-${{ matrix.php }}-${{ matrix.dependencies }}"
-
-      - name: "Install lowest dependencies"
-        if: ${{ matrix.dependencies == 'lowest' }}
-        run: "composer update --prefer-lowest --no-interaction --no-progress --ansi"
-
-      - name: "Install highest dependencies"
-        if: ${{ matrix.dependencies == 'highest' }}
-        run: "composer update --no-interaction --no-progress --ansi"
+          dependency-versions: "${{ matrix.dependencies }}"
 
       - name: "Run psalm"
         run: vendor/bin/psalm
