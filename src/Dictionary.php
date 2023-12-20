@@ -13,25 +13,21 @@ use function strlen;
 /** @psalm-immutable */
 final class Dictionary
 {
-    const DICTIONARY_UNMISTAKABLE = '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
-    const DICTIONARY_ALPHANUMERIC = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    public const DICTIONARY_UNMISTAKABLE = '23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+    public const DICTIONARY_ALPHANUMERIC = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
-    /** @var string */
-    public $charsSet;
+    public string $charsSet;
 
     /**
      * @var int[]
      *
      * @psalm-var non-empty-array<non-empty-string, int>
      */
-    public $charIndexes;
+    public array $charIndexes;
 
-    /** @var int */
-    public $length;
+    public int $length;
 
     /**
-     * @param string $charsSet
-     *
      * @psalm-param non-empty-string $charsSet
      *
      * @throws DictionaryException
@@ -83,8 +79,6 @@ final class Dictionary
     }
 
     /**
-     * @param int $index
-     *
      * @throws DictionaryException
      *
      * @return string
@@ -99,8 +93,6 @@ final class Dictionary
     }
 
     /**
-     * @param string $char
-     *
      * @throws DictionaryException
      *
      * @return int

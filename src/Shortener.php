@@ -19,23 +19,13 @@ use function substr;
 class Shortener
 {
     /**
-     * @var Dictionary
-     */
-    private $dictionary;
-
-    /**
-     * @var ConverterInterface
-     */
-    private $converter;
-
-    /**
      * @param Dictionary         $dictionary
      * @param ConverterInterface $converter
      */
-    public function __construct(Dictionary $dictionary, ConverterInterface $converter)
-    {
-        $this->dictionary = $dictionary;
-        $this->converter = $converter;
+    public function __construct(
+        private readonly Dictionary $dictionary,
+        private readonly ConverterInterface $converter,
+    ) {
     }
 
     public static function make(Dictionary $dictionary) : self

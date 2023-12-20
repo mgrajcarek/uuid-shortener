@@ -114,14 +114,13 @@ abstract class BaseShorteningBench
         'c15f5581-e047-45b7-a36f-dfef4e7ba4bb',
     ];
 
-    /** @var Shortener */
-    private $shortener;
-    /** @var string */
-    private $shortenedTinyUuid;
-    /** @var string */
-    private $shortenedHugeUuid;
-    /** @var array */
-    private $shortenedPromoscuousUuids;
+    private readonly Shortener $shortener;
+
+    private readonly string $shortenedTinyUuid;
+
+    private readonly string $shortenedHugeUuid;
+
+    private readonly array $shortenedPromoscuousUuids;
 
     public function __construct()
     {
@@ -129,7 +128,7 @@ abstract class BaseShorteningBench
 
         $this->shortenedTinyUuid = $this->shortener->reduce(self::TINY_UUID);
         $this->shortenedHugeUuid = $this->shortener->reduce(self::HUGE_UUID);
-        $this->shortenedPromoscuousUuids = \array_map([$this->shortener, 'reduce'], self::UUIDS_TO_BE_SHORTENED);
+        $this->shortenedPromoscuousUuids = \array_map($this->shortener->reduce(...), self::UUIDS_TO_BE_SHORTENED);
     }
 
     abstract protected function newShortener(): Shortener;
@@ -146,7 +145,7 @@ abstract class BaseShorteningBench
 
     public function benchShorteningOfPromiscuousUuids(): void
     {
-        array_map([$this->shortener, 'reduce'], self::UUIDS_TO_BE_SHORTENED);
+        array_map($this->shortener->reduce(...), self::UUIDS_TO_BE_SHORTENED);
     }
 
     public function benchExpandingOfTinyUuid(): void
@@ -161,6 +160,6 @@ abstract class BaseShorteningBench
 
     public function benchExpandingOfPromiscuousUuids(): void
     {
-        array_map([$this->shortener, 'expand'], $this->shortenedPromoscuousUuids);
+        array_map($this->shortener->expand(...), $this->shortenedPromoscuousUuids);
     }
 }

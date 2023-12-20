@@ -20,24 +20,18 @@ use const STR_PAD_LEFT;
 /** @psalm-immutable */
 final class GMPShortener extends Shortener
 {
-    /** @var Dictionary */
-    private $dictionary;
-
     /**
      * @var string[] a map of character replacements to be used when translating a number that is
      *               in base(length(Dictionary)) (keys) to the dictionary characters (values).
      *
      * @psalm-var non-empty-array<non-empty-string, non-empty-string>
      */
-    private $baseReplacements;
+    private readonly array $baseReplacements;
 
-    /** @var string */
-    private $allowedCharactersMatcher;
+    private readonly string $allowedCharactersMatcher;
 
-    public function __construct(Dictionary $dictionary)
+    public function __construct(private readonly Dictionary $dictionary)
     {
-        $this->dictionary = $dictionary;
-
         $replacements = [];
 
         foreach (range(0, $dictionary->length - 1) as $characterIndex) {
