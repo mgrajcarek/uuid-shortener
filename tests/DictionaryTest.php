@@ -26,14 +26,14 @@ final class DictionaryTest extends TestCase
         self::assertSame(57, $this->dictionary->length);
         self::assertSame(
             [
-                2   => 0,
-                3   => 1,
-                4   => 2,
-                5   => 3,
-                6   => 4,
-                7   => 5,
-                8   => 6,
-                9   => 7,
+                2 => 0,
+                3 => 1,
+                4 => 2,
+                5 => 3,
+                6 => 4,
+                7 => 5,
+                8 => 6,
+                9 => 7,
                 'A' => 8,
                 'B' => 9,
                 'C' => 10,
@@ -133,6 +133,7 @@ final class DictionaryTest extends TestCase
 
         $this->dictionary->getCharIndex('Ć');
     }
+
     public function testCreateUnmistakableDictionary(): void
     {
         $dictionary = Dictionary::createUnmistakable();

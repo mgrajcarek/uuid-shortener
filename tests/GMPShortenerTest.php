@@ -10,7 +10,7 @@ use Keiko\Uuid\Shortener\Shortener;
 
 final class GMPShortenerTest extends ShortenerTestCase
 {
-    protected function shortener(Dictionary $dictionary = null) : Shortener
+    protected function shortener(Dictionary $dictionary = null): Shortener
     {
         return new GMPShortener($dictionary ?? Dictionary::createUnmistakable());
     }
