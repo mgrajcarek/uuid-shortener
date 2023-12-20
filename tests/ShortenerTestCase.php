@@ -6,7 +6,6 @@ namespace Test\Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Dictionary;
 use Keiko\Uuid\Shortener\Exception\DictionaryException;
-use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use Keiko\Uuid\Shortener\Shortener;
 use PHPUnit\Framework\TestCase;
 
@@ -74,12 +73,12 @@ abstract class ShortenerTestCase extends TestCase
             ['806d0969-95b3-433b-976f-774611fdacbb', 'mavTAjNm4NVztDwh4gdSrQ'],
             ['0c5873e8-7fea-4570-9487-ffe96ec30257', 'LpGtrrQFCbneY2GtQiXDD4'],
             ['ffffffff-ffff-ffff-ffff-ffffffffffff', '5B8cwPMGnU6qLbRvo7qEZo'],
-            'One leading zero'                  => ['07fe2146-0a94-4a4a-9956-4cfd0d3560d9', 'rcPMmyWuaewoF8EM3JK5S3'],
-            '2 Leading zeroes'                  => ['00fe2146-0a94-4a4a-9956-4cfd0d3560d9', 'qgXznd8uPVbCJg5tB5r5C'],
+            'One leading zero' => ['07fe2146-0a94-4a4a-9956-4cfd0d3560d9', 'rcPMmyWuaewoF8EM3JK5S3'],
+            '2 Leading zeroes' => ['00fe2146-0a94-4a4a-9956-4cfd0d3560d9', 'qgXznd8uPVbCJg5tB5r5C'],
             'Smallest UUID, max leading zeroes' => ['00000000-0000-0000-0000-000000000001', '3'],
-            'Small UUID, many leading zeroes'   => ['00000000-0000-0000-0000-0000000000aa', 'z4'],
-            'Large UUID, many trailing zeroes'  => ['aa000000-0000-0000-0000-000000000000', 'ABitJoXBZDBeRvbiWuB5GY'],
-            'Random UUID with trailing zeroes'  => ['a7fe2146-0a94-4a4a-9956-4cfd0d3560d0', 'Fbab7rU5aCkhaybY3jphtX'],
+            'Small UUID, many leading zeroes' => ['00000000-0000-0000-0000-0000000000aa', 'z4'],
+            'Large UUID, many trailing zeroes' => ['aa000000-0000-0000-0000-000000000000', 'ABitJoXBZDBeRvbiWuB5GY'],
+            'Random UUID with trailing zeroes' => ['a7fe2146-0a94-4a4a-9956-4cfd0d3560d0', 'Fbab7rU5aCkhaybY3jphtX'],
         ];
     }
 }

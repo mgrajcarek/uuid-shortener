@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Benchmark\Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Shortener;
-use function array_map;
 
 abstract class BaseShorteningBench
 {
@@ -145,7 +144,7 @@ abstract class BaseShorteningBench
 
     public function benchShorteningOfPromiscuousUuids(): void
     {
-        array_map($this->shortener->reduce(...), self::UUIDS_TO_BE_SHORTENED);
+        \array_map($this->shortener->reduce(...), self::UUIDS_TO_BE_SHORTENED);
     }
 
     public function benchExpandingOfTinyUuid(): void
@@ -160,6 +159,6 @@ abstract class BaseShorteningBench
 
     public function benchExpandingOfPromiscuousUuids(): void
     {
-        array_map($this->shortener->expand(...), $this->shortenedPromoscuousUuids);
+        \array_map($this->shortener->expand(...), $this->shortenedPromoscuousUuids);
     }
 }

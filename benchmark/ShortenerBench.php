@@ -10,7 +10,7 @@ use Keiko\Uuid\Shortener\Shortener;
 
 final class ShortenerBench extends BaseShorteningBench
 {
-    protected function newShortener() : Shortener
+    protected function newShortener(): Shortener
     {
         return new Shortener(Dictionary::createUnmistakable(), new Converter());
     }
