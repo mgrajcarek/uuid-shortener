@@ -8,12 +8,9 @@ use Brick\Math\BigInteger;
 use Keiko\Uuid\Shortener\Number\BigInt\Converter;
 use PHPUnit\Framework\TestCase;
 
-class ConverterTest extends TestCase
+final class ConverterTest extends TestCase
 {
-    /**
-     * @var Converter
-     */
-    private $converter;
+    private Converter $converter;
 
     protected function setUp(): void
     {

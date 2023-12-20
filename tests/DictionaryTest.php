@@ -8,12 +8,9 @@ use Keiko\Uuid\Shortener\Dictionary;
 use Keiko\Uuid\Shortener\Exception\DictionaryException;
 use PHPUnit\Framework\TestCase;
 
-class DictionaryTest extends TestCase
+final class DictionaryTest extends TestCase
 {
-    /**
-     * @var Dictionary
-     */
-    private $dictionary;
+    private Dictionary $dictionary;
 
     protected function setUp(): void
     {
