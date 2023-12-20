@@ -40,6 +40,10 @@ jobs:
         with:
           dependency-versions: "${{ matrix.dependencies }}"
 
+      - name: "Check code style"
+        if: ${{ matrix.dependencies == 'highest' && matrix.php == '8.1' }}
+        run: composer code-style:check
+
       - name: "Run psalm"
         run: vendor/bin/psalm
 

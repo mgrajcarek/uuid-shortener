@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Exception\DictionaryException;
-use function array_flip;
-use function count_chars;
-use function str_split;
-use function strlen;
 
 /** @psalm-immutable */
 final class Dictionary
@@ -34,25 +30,23 @@ final class Dictionary
      */
     public function __construct(string $charsSet)
     {
-        $length = strlen($charsSet);
+        $length = \strlen($charsSet);
 
         if ($length <= 16) {
             throw DictionaryException::charsSetTooShort();
         }
 
-        $uniqueChars = count_chars($charsSet, 3);
-        if (strlen($uniqueChars) !== $length) {
+        $uniqueChars = \count_chars($charsSet, 3);
+        if (\strlen($uniqueChars) !== $length) {
             throw DictionaryException::nonUniqueChars();
         }
 
         $this->charsSet = $charsSet;
         $this->length = $length;
-        $this->charIndexes = array_flip(str_split($charsSet));
+        $this->charIndexes = \array_flip(\str_split($charsSet));
     }
 
     /**
-     * @return Dictionary
-     *
      * @psalm-pure
      */
     public static function createUnmistakable(): Dictionary
@@ -61,8 +55,6 @@ final class Dictionary
     }
 
     /**
-     * @return Dictionary
-     *
      * @psalm-pure
      */
     public static function createAlphanumeric(): Dictionary
@@ -70,9 +62,6 @@ final class Dictionary
         return new self(self::DICTIONARY_ALPHANUMERIC);
     }
 
-    /**
-     * @return int
-     */
     public function getLength(): int
     {
         return $this->length;
@@ -80,8 +69,6 @@ final class Dictionary
 
     /**
      * @throws DictionaryException
-     *
-     * @return string
      */
     public function getCharAt(int $index): string
     {
@@ -94,8 +81,6 @@ final class Dictionary
 
     /**
      * @throws DictionaryException
-     *
-     * @return int
      */
     public function getCharIndex(string $char): int
     {

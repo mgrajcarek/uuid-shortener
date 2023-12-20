@@ -28,7 +28,8 @@
     "phpunit/phpunit": "^8.5.26",
     "vimeo/psalm": "^4.3.1",
     "phpbench/phpbench": "^1.1.1",
-    "rector/rector": "^0.18.12"
+    "rector/rector": "^0.18.12",
+    "php-cs-fixer/shim": "^3.41"
   },
   "suggest": {
     "ramsey/uuid": "A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID)",
@@ -49,6 +50,8 @@
     }
   },
   "scripts": {
+    "code-style:check": "php-cs-fixer fix --dry-run --diff --ansi",
+    "code-style:fix": "php-cs-fixer fix --diff --ansi",
     "rector:check": "rector --dry-run --ansi",
     "rector:fix": "rector --ansi"
   }
