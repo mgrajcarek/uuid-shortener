@@ -64,4 +64,3 @@ shortener based on your system dependencies.
 UUID Shortener is not connected with any UUID generator library. 
 It also does not generate new UUIDs. 
 It has only one purpose - transform your long, hexadecimal IDs (no matter where they come from), into a shorter and easier to read set of characters.
-In the near future additional service will be added, which will be able to generate short UUIDs in companion with most popular UUID generators.
