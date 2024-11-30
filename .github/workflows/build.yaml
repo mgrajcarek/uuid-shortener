@@ -46,10 +46,12 @@ jobs:
         run: composer code-style:check
 
       - name: "Run psalm"
+        if: ${{ matrix.dependencies == 'highest' || matrix.php != '8.4' }}
         run: vendor/bin/psalm
 
       - name: "Run phpunit"
         run: vendor/bin/phpunit
 
       - name: "Run phpbench"
+        if: ${{ matrix.dependencies == 'highest' || matrix.php != '8.4' }}
         run: vendor/bin/phpbench run
