@@ -11,7 +11,6 @@ return (new \PhpCsFixer\Config())->setRiskyAllowed(true)
         '@PHP81Migration' => true,
         '@Symfony' => true,
         'yoda_style' => false,
-
     ])
     ->setFinder($finder)
 ;

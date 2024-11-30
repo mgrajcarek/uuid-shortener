@@ -26,14 +26,14 @@ final class ShortenerIsPure
 {
     public function testImmutableConverterFromHex(
         ConverterInterface $converter,
-        string $hex
+        string $hex,
     ): BigInteger {
         return $converter->fromHex($hex);
     }
 
     public function testImmutableConverterToHex(
         ConverterInterface $converter,
-        BigInteger $number
+        BigInteger $number,
     ): string {
         return $converter->toHex($number);
     }
