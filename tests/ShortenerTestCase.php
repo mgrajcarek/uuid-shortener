@@ -7,15 +7,14 @@ namespace Test\Keiko\Uuid\Shortener;
 use Keiko\Uuid\Shortener\Dictionary;
 use Keiko\Uuid\Shortener\Exception\DictionaryException;
 use Keiko\Uuid\Shortener\Shortener;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 abstract class ShortenerTestCase extends TestCase
 {
-    abstract protected function shortener(Dictionary $dictionary = null): Shortener;
+    abstract protected function shortener(?Dictionary $dictionary = null): Shortener;
 
-    /**
-     * @dataProvider uuidShortenedUnmistakable
-     */
+    #[DataProvider('uuidShortenedUnmistakable')]
     public function testUuidsAndShortUuidsAreIsomorphisms(string $uuid): void
     {
         self::assertSame(
@@ -24,18 +23,14 @@ abstract class ShortenerTestCase extends TestCase
         );
     }
 
-    /**
-     * @dataProvider uuidShortenedUnmistakable
-     */
+    #[DataProvider('uuidShortenedUnmistakable')]
     public function testTransformUuidToShorterEquivalentUsingUnmistakableCharsSet(string $uuid, string $reduced): void
     {
         $this->assertEquals($reduced, $this->shortener()->reduce($uuid));
     }
 
-    /**
-     * @dataProvider uuidShortenedAlphanumeric
-     */
-    public function testTransformUuidToShorterEquivalentUsingAlphanumericCharsSet($uuid, $reduced): void
+    #[DataProvider('uuidShortenedAlphanumeric')]
+    public function testTransformUuidToShorterEquivalentUsingAlphanumericCharsSet(string $uuid, string $reduced): void
     {
         $this->assertEquals($reduced, $this->shortener(Dictionary::createAlphanumeric())->reduce($uuid));
     }
@@ -57,7 +52,7 @@ abstract class ShortenerTestCase extends TestCase
         );
     }
 
-    public function uuidShortenedAlphanumeric(): array
+    public static function uuidShortenedAlphanumeric(): array
     {
         return [
             ['4e52c919-513e-4562-9248-7dd612c6c1ca', 'wO7daP4yaaDlTYOcoXEnN3'],
@@ -66,7 +61,7 @@ abstract class ShortenerTestCase extends TestCase
         ];
     }
 
-    public function uuidShortenedUnmistakable(): array
+    public static function uuidShortenedUnmistakable(): array
     {
         return [
             ['4e52c919-513e-4562-9248-7dd612c6c1ca', 'fpfyRTmt6XeE9ehEKZ5LwF'],

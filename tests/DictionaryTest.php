@@ -6,6 +6,7 @@ namespace Test\Keiko\Uuid\Shortener;
 
 use Keiko\Uuid\Shortener\Dictionary;
 use Keiko\Uuid\Shortener\Exception\DictionaryException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class DictionaryTest extends TestCase
@@ -105,9 +106,7 @@ final class DictionaryTest extends TestCase
         $this->dictionary->getCharAt(100);
     }
 
-    /**
-     * @dataProvider tooShortCharsSets
-     */
+    #[DataProvider('tooShortCharsSets')]
     public function testThrowExceptionWhenProvidedCharsSetIsTooShort(string $charsSet): void
     {
         $this->expectExceptionObject(DictionaryException::charsSetTooShort());
@@ -150,7 +149,7 @@ final class DictionaryTest extends TestCase
         $this->assertEquals('0', $dictionary->getCharAt(9));
     }
 
-    public function tooShortCharsSets(): array
+    public static function tooShortCharsSets(): array
     {
         return [
             [''],
