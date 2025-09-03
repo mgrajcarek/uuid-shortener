@@ -28,7 +28,7 @@
     "phpunit/phpunit": "^10.5.38",
     "vimeo/psalm": "^6.5.0",
     "phpbench/phpbench": "^1.4.1",
-    "rector/rector": "^1.2",
+    "rector/rector": "^2.1.4",
     "php-cs-fixer/shim": "^3.87.1"
   },
   "suggest": {
