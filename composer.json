@@ -26,7 +26,7 @@
   "require-dev": {
     "ext-gmp": "^8.1",
     "phpunit/phpunit": "^10.5.38",
-    "vimeo/psalm": "^5.26.1",
+    "vimeo/psalm": "^6.5.0",
     "phpbench/phpbench": "^1.4.1",
     "rector/rector": "^1.2",
     "php-cs-fixer/shim": "^3.65.0"
