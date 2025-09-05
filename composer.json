@@ -44,11 +44,6 @@
       "Test\\Keiko\\Uuid\\Shortener\\": "tests/"
     }
   },
-  "config": {
-    "platform": {
-      "php": "8.1.26"
-    }
-  },
   "scripts": {
     "code-style:check": "php-cs-fixer fix --dry-run --diff --ansi",
     "code-style:fix": "php-cs-fixer fix --diff --ansi",
