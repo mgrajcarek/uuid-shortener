@@ -41,7 +41,7 @@ jobs:
       - name: "Update Composer platform version"
         if: ${{ matrix.php != '8.1' }}
         shell: bash
-        run: "composer config platform.php ${{ matrix.php }}"
+        run: "composer config platform.php `php -r 'echo PHP_VERSION;'`"
 
       - name: "Install dependencies"
         uses: ramsey/composer-install@v4
