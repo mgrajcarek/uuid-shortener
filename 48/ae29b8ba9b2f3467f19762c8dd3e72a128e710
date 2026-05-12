@@ -1,0 +1,14 @@
+.github/workflows/build.yaml
+  h_2bcd98c360af81 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "48ae29b8ba9b2f3467f19762c8dd3e72a128e710",
+  "prompts": {},
+  "humans": {
+    "h_2bcd98c360af81": {
+      "author": "Marcin Michalski <evulmastah@gmail.com>"
+    }
+  }
+}
